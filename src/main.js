@@ -1,6 +1,6 @@
 import * as THREE from 'three';
-import { plane, boundaryLeft, boundaryRight, boundaryBack, boundaryFront } from './meshes';
-// import { OrbitControls } from 'three/examples/jsm/Addons.js';
+import { plane, boundaryLeft, boundaryRight, boundaryBack, boundaryFront, snakeHead } from './meshes';
+import { OrbitControls } from 'three/examples/jsm/Addons.js';
 
 const scene = new THREE.Scene();
 scene.background = new THREE.Color("#333");
@@ -13,9 +13,10 @@ renderer.setSize(window.innerWidth, window.innerHeight);
 renderer.setAnimationLoop(animate);
 document.body.appendChild(renderer.domElement);
 
-// new OrbitControls(camera, renderer.domElement);
+new OrbitControls(camera, renderer.domElement);
 
 scene.add(plane, boundaryLeft, boundaryRight, boundaryFront, boundaryBack);
+scene.add(snakeHead);
 
 function animate() {
     renderer.render(scene, camera);
