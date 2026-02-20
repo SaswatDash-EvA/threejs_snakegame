@@ -1,5 +1,5 @@
 import * as THREE from 'three';
-import { plane, boundaryLeft, boundaryRight, boundaryBack, boundaryFront, snakeHead } from './meshes';
+import { plane, boundaryLeft, boundaryRight, boundaryBack, boundaryFront, snakeHead, snakeBody } from './meshes';
 import { OrbitControls } from 'three/examples/jsm/Addons.js';
 
 const scene = new THREE.Scene();
@@ -16,7 +16,7 @@ document.body.appendChild(renderer.domElement);
 new OrbitControls(camera, renderer.domElement);
 
 scene.add(plane, boundaryLeft, boundaryRight, boundaryFront, boundaryBack);
-scene.add(snakeHead);
+scene.add(snakeHead, snakeBody);
 
 function animate() {
     renderer.render(scene, camera);

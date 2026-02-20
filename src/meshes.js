@@ -1,5 +1,5 @@
 import * as THREE from 'three';
-import { planeGeometry, boundaryFenceGeometrylr, boundaryFenceGeometryfb, snakeHeadGeometry } from "./geometries";
+import { planeGeometry, boundaryFenceGeometrylr, boundaryFenceGeometryfb, snakeHeadGeometry, snakeBodyGeometry } from "./geometries";
 import { planeMaterial, boundaryFenceMaterial, snakeMaterial } from "./materials";
 
 export const plane = new THREE.Mesh(planeGeometry, planeMaterial);
@@ -11,6 +11,7 @@ export const boundaryFront = new THREE.Mesh(boundaryFenceGeometryfb, boundaryFen
 export const boundaryBack = new THREE.Mesh(boundaryFenceGeometryfb, boundaryFenceMaterial);
 
 export const snakeHead = new THREE.Mesh(snakeHeadGeometry, snakeMaterial);
+export const snakeBody = new THREE.Mesh(snakeBodyGeometry, snakeMaterial);
 
 boundaryLeft.position.set(0.8125, 0.0125, 0);
 boundaryRight.position.set(-0.8125, 0.0125, 0);
