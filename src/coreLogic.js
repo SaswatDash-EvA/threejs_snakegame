@@ -1,44 +1,75 @@
 import { gameOver } from "./ui-update";
 
-let snakeBodyArray = [[8, 8], [8, 9], [8, 10]];
-let fruitPosition = [9, 12];
+export const GRID_SIZE = 16;
+export const CELL_SIZE = 1.6 / GRID_SIZE;
+export const HALF_BOARD = 0.8;
+
+export let snakeBodyArray = [
+    [8, 8],
+    [8, 9],
+    [8, 10]
+];
+
+export let fruitPosition = [5, 5];
+
 let score = 0;
-export let currentDirection = [0, 1];
-export let nextDirection = [0, 1];
 
-function spawnFruit() {
+export let currentDirection = [0, -1];
+let nextDirection = [0, -1];
 
+export function setNextDirection(dir) {
+    nextDirection = dir;
 }
 
-export function updateSnakePositions() {
-    for (let i = 1; i < snakeBodyArray.length; i++) {
-        snakeBodyArray[i][0] = snakeBodyArray[i-1][0];
-        snakeBodyArray[i][1] = snakeBodyArray[i-1][1];
-    }
-    if (nextDirection[0] === 0) snakeBodyArray[0][0] += nextDirection[0];
-    else snakeBodyArray[0][1] += nextDirection[1];
+function spawnFruit() {
+    fruitPosition = [
+        Math.floor(Math.random() * GRID_SIZE),
+        Math.floor(Math.random() * GRID_SIZE)
+    ];
+}
+
+export function updateSnake() {
+    currentDirection[0] = nextDirection[0];
+    currentDirection[1] = nextDirection[1];
+
+    const newHead = [
+        snakeBodyArray[0][0] + currentDirection[0],
+        snakeBodyArray[0][1] + currentDirection[1]
+    ];
+
+    snakeBodyArray.unshift(newHead);
+    snakeBodyArray.pop();
 }
 
 export function checkCollision() {
-    if (snakeBodyArray[0][0] > 15 || snakeBodyArray[0][0] < 0 || snakeBodyArray[0][1] > 15 || snakeBodyArray[0][1] < 0) {
+    const head = snakeBodyArray[0];
+
+    if (
+        head[0] < 0 || head[0] >= GRID_SIZE ||
+        head[1] < 0 || head[1] >= GRID_SIZE
+    ) {
         gameOver();
     }
-    else {
-        snakeBodyArray.forEach(bodyPart => {
-            if (snakeBodyArray[0][0] === bodyPart[0] && snakeBodyArray[0][1] === bodyPart[1])
-                gameOver();
-        });
+
+    for (let i = 1; i < snakeBodyArray.length; i++) {
+        if (
+            head[0] === snakeBodyArray[i][0] &&
+            head[1] === snakeBodyArray[i][1]
+        ) {
+            gameOver();
+        }
     }
 }
 
 export function checkFruitCollision() {
-    if (snakeBodyArray[0][0] === fruitPosition[0] || snakeBodyArray[0][1] === fruitPosition[1]) {
+    const head = snakeBodyArray[0];
+
+    if (
+        head[0] === fruitPosition[0] &&
+        head[1] === fruitPosition[1]
+    ) {
         score++;
+        snakeBodyArray.push([...snakeBodyArray[snakeBodyArray.length - 1]]);
         spawnFruit();
     }
 }
-
-
-export const GRID_SIZE = 16
-let TICK_RATE = 10;
-let TICK_INTERVAL = 1 / TICK_RATE;

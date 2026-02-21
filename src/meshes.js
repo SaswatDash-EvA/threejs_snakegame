@@ -11,8 +11,6 @@ export const boundaryFront = new THREE.Mesh(boundaryFenceGeometryfb, boundaryFen
 export const boundaryBack = new THREE.Mesh(boundaryFenceGeometryfb, boundaryFenceMaterial);
 
 export const snakeHead = new THREE.Mesh(snakeHeadGeometry, snakeMaterial);
-export const snakeBody = new THREE.Mesh(snakeBodyGeometry, snakeMaterial);
-export const snakeTail = new THREE.Mesh(snakeTailGeometry, snakeMaterial);
 
 boundaryLeft.position.set(0.8125, 0.0125, 0);
 boundaryRight.position.set(-0.8125, 0.0125, 0);
