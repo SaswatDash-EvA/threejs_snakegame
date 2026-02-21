@@ -9,12 +9,14 @@ export const boundaryFenceGeometrylr = new THREE.BoxGeometry(0.025, 0.025, 1.65)
 export const boundaryFenceGeometryfb = new THREE.BoxGeometry(1.6, 0.025, 0.025);
 
 // Snake geometry
-export const snakeHeadGeometry = new THREE.CapsuleGeometry(0.05, 0.08, 32, 64);
+export const snakeHeadGeometry = new THREE.CapsuleGeometry(0.05, 0.05, 32, 64);
 snakeHeadGeometry.rotateX(Math.PI/2);
-snakeHeadGeometry.translate(0, 0.05, 0);
+snakeHeadGeometry.translate(0.05, 0.05, 0.075);
 
 export const snakeBodyGeometry = new THREE.CylinderGeometry(0.05, 0.05, 0.1, 32, 64, true);
 snakeBodyGeometry.rotateX(Math.PI/2);
-snakeBodyGeometry.translate(0, 0.05, 0.08);
+snakeBodyGeometry.translate(0.05, 0.05, 0.15);
 
-// TODO: Create the snake tail with an Ellipsoid
+export const snakeTailGeometry = new THREE.CapsuleGeometry(0.05, 0.05, 32, 64);
+snakeTailGeometry.rotateX(Math.PI/2);
+snakeTailGeometry.translate(0.05, 0.05, 0.225);

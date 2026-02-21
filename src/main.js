@@ -1,6 +1,7 @@
 import * as THREE from 'three';
-import { plane, boundaryLeft, boundaryRight, boundaryBack, boundaryFront, snakeHead, snakeBody } from './meshes';
+import { plane, boundaryLeft, boundaryRight, boundaryBack, boundaryFront, snakeHead, snakeBody, snakeTail } from './meshes';
 import { OrbitControls } from 'three/examples/jsm/Addons.js';
+import { currentDirection } from './coreLogic';
 
 const scene = new THREE.Scene();
 scene.background = new THREE.Color("#333");
@@ -16,7 +17,7 @@ document.body.appendChild(renderer.domElement);
 new OrbitControls(camera, renderer.domElement);
 
 scene.add(plane, boundaryLeft, boundaryRight, boundaryFront, boundaryBack);
-scene.add(snakeHead, snakeBody);
+scene.add(snakeHead, snakeBody, snakeTail);
 
 function animate() {
     renderer.render(scene, camera);
@@ -28,3 +29,10 @@ function onWindowResize() {
 	camera.updateProjectionMatrix();
 	renderer.setSize(window.innerWidth, window.innerHeight);
 }
+
+window.addEventListener("keydown", (e) => {
+	if (e.key === "ArrowUp")    if (currentDirection[1] != -1) nextDirection = [0, 1];
+	if (e.key === "ArrowDown")  if (currentDirection[1] != 1) nextDirection = [0, -1];
+	if (e.key === "ArrowLeft")  if (currentDirection[0] != 1) nextDirection = [-1, 0];
+	if (e.key === "ArrowRight") if (currentDirection[0] != -1) nextDirection = [1, 0];
+});
